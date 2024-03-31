@@ -3,15 +3,15 @@ pipeline {
     
     environment {
         DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = '1'
-        DOCKER_HUB_USERNAME = credentials('dpcode72')
-        DOCKER_HUB_PASSWORD = credentials('dpcode72')
-        DOCKER_IMAGE_NAME = 'dpcode72/devopsapicicd:1.0'
+        DOCKER_HUB_USERNAME = credentials('amisha908')
+        DOCKER_HUB_PASSWORD = credentials('amisha908')
+        DOCKER_IMAGE_NAME = 'amisha908/dockerdevops:1.0'
     }
     
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://gitlab.com/deepak-kumar1/devops-project.git'
+                git branch: 'main', url: 'https://github.com/amisha908/MyDevopsDocker.git'
             }
         }
         stage('Build') {
@@ -50,7 +50,7 @@ pipeline {
                 dockerTool 'Docker'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dpcode72', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'amisha908', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                     sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
                     sh "docker push $DOCKER_IMAGE_NAME"
                 }
